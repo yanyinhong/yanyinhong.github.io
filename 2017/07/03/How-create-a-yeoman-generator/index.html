@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="yanyinhong的个人博客">
+    <title>使用yeoman generator创建脚手架 - yanyinhong的个人博客</title>
+    <meta name="author" content="Yan Yinhong">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <meta name="description" content="开发时，经常会需要拷贝原有的目录结构和代码，如果有脚手架帮助做这些事，可以省去不少工作量。yeoman的generator就可以帮助我们构建这样的脚手架。">
+<meta name="keywords" content="yeoman">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="使用yeoman generator创建脚手架">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/07/03/How-create-a-yeoman-generator/index.html">
+<meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="开发时，经常会需要拷贝原有的目录结构和代码，如果有脚手架帮助做这些事，可以省去不少工作量。yeoman的generator就可以帮助我们构建这样的脚手架。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-11-15T07:42:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用yeoman generator创建脚手架">
+<meta name="twitter:description" content="开发时，经常会需要拷贝原有的目录结构和代码，如果有脚手架帮助做这些事，可以省去不少工作量。yeoman的generator就可以帮助我们构建这样的脚手架。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-kdu6oj4zqgmizpyqjztwmdd3ijg97gexku6krhqkmzaqrxulpcdn0bpenolp.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-98343988-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="2">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">yanyinhong的个人博客</a>
+    </div>
+    
+        
+            <a  class="header-right-icon "
+                href="#about">
+        
+        
+            <i class="fa fa-lg fa-rss"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="2">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Yan Yinhong</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="2"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            使用yeoman generator创建脚手架
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-07-03T13:30:38+08:00">
+	
+		    7月 03, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/前端/">前端</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>开发时，经常会需要拷贝原有的目录结构和代码，如果有脚手架帮助做这些事，可以省去不少工作量。yeoman的generator就可以帮助我们构建这样的脚手架。</p>
+<a id="more"></a>
+<h4 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h4><p>首先，确保本地开发环境安装了<a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a>和<a href="https://www.npmjs.com/" target="_blank" rel="external">NPM</a>。需要注意Node的版本，要求在4.0以上，NPM的版本也需要和Node版本相匹配。另外，高版本的Node会支持更多的ES6特性，方便使用新语法来书写代码。</p>
+<p>接着，全局安装<a href="http://yeoman.io/" target="_blank" rel="external">yeoman</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install yeoman -g</span><br></pre></td></tr></table></figure>
+<p>yeoman支持为自己的脚手架建立一个<a href="http://yeoman.io/authoring/index.html" target="_blank" rel="external">generator</a>，通过运行generator来生成脚手架。</p>
+<h4 id="建立项目"><a href="#建立项目" class="headerlink" title="建立项目"></a>建立项目</h4><p>首先，创建项目文件夹，文件夹名格式为<code>generator-name</code>，其中<code>name</code>是需要创建的generator的名字。比如我需要创建的是一个webpack用法示例的项目脚手架，文件夹取名为<code>generator-webpack-example</code>。</p>
+<p>然后，初始化项目，并根据提示输入项目信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>接着，创建项目所需的结构。使用yeoman执行generator时（比如<code>yo webpack-example</code>），yeoman默认会去执行<code>app</code>目录下的入口文件，代码需要放在<code>app</code>中。并且命令会从<code>app</code>中的<code>templates</code>目录读取模板。详细配置参考官方文章<a href="http://yeoman.io/authoring/index.html" target="_blank" rel="external">WRITING YOUR OWN YEOMAN GENERATOR</a>。</p>
+<p>最后项目的结构如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- app</span><br><span class="line"> |- templates</span><br><span class="line"> |- index.js</span><br><span class="line"> |- prompts.js</span><br><span class="line">- package.json</span><br><span class="line">- README.md</span><br></pre></td></tr></table></figure>
+<h4 id="模板结构"><a href="#模板结构" class="headerlink" title="模板结构"></a>模板结构</h4><p>templates目录用来存放产出文件的模板。脚手架的实现使用了<code>lodash</code>，所以模板直接使用<code>lodash</code>提供的模板语法。templates目录中的结构如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- templates</span><br><span class="line"> |- index_tmpl.html</span><br><span class="line"> |- index_tmpl.js</span><br><span class="line"> |- package_tmpl.json</span><br><span class="line"> |- README_tmpl.md</span><br><span class="line"> |- webpack_tmpl.config.js</span><br></pre></td></tr></table></figure>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>index.js是主文件，用来实现脚手架的具体操作。其中class中使用的各方法是yeoman的generator提供的函数钩子，针对功能填充到对应的钩子函数中即可。可用的钩子方法可参考<a href="http://yeoman.io/authoring/running-context.html" target="_blank" rel="external">GENERATOR RUNTIME CONTEXT</a>。</p>
+<p>首先，安装文件依赖的模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install yeoman-generator chalk yosay lodash deep-extend mkdirp -S</span><br></pre></td></tr></table></figure>
+<p>然后，使用Generator的API实现脚手架。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">const</span> Generator = <span class="built_in">require</span>(<span class="string">'yeoman-generator'</span>);</span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"><span class="keyword">const</span> yosay = <span class="built_in">require</span>(<span class="string">'yosay'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> _ = <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"><span class="keyword">const</span> extend = <span class="built_in">require</span>(<span class="string">'deep-extend'</span>);</span><br><span class="line"><span class="keyword">const</span> mkdirp = <span class="built_in">require</span>(<span class="string">'mkdirp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> prompts = <span class="built_in">require</span>(<span class="string">'./prompts'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Generator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  initializing() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.props = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  prompting() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打招呼</span></span><br><span class="line">    <span class="keyword">this</span>.log(yosay(</span><br><span class="line">      <span class="string">'Welcome to the '</span> + chalk.red(<span class="string">'generator-webpack-example'</span>) + <span class="string">' generator!'</span></span><br><span class="line">    ));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.prompt(prompts).then(<span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.props = props;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  writing() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (path.basename(<span class="keyword">this</span>.destinationPath()) !== <span class="keyword">this</span>.props.projectName) &#123;</span><br><span class="line">      <span class="keyword">this</span>.log(</span><br><span class="line">        <span class="string">'Your generator must be inside a folder named '</span> + <span class="keyword">this</span>.props.projectName + <span class="string">'\n'</span> +</span><br><span class="line">        <span class="string">'I\'ll automatically create this folder.'</span></span><br><span class="line">      );</span><br><span class="line">      mkdirp(<span class="keyword">this</span>.props.projectName);</span><br><span class="line">      <span class="keyword">this</span>.destinationRoot(<span class="keyword">this</span>.destinationPath(<span class="keyword">this</span>.props.projectName));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写README.md</span></span><br><span class="line">    <span class="keyword">const</span> readmeTpl = _.template(<span class="keyword">this</span>.fs.read(<span class="keyword">this</span>.templatePath(<span class="string">'README_tmpl.md'</span>)));</span><br><span class="line">    <span class="keyword">this</span>.fs.write(<span class="keyword">this</span>.destinationPath(<span class="string">'README.md'</span>), readmeTpl(&#123;</span><br><span class="line">      projectTitle: <span class="keyword">this</span>.props.projectTitle,</span><br><span class="line">      projectDesc: <span class="keyword">this</span>.props.projectDesc</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写package.json</span></span><br><span class="line">    <span class="keyword">const</span> pkg = <span class="keyword">this</span>.fs.readJSON(<span class="keyword">this</span>.templatePath(<span class="string">'package_tmpl.json'</span>), &#123;&#125;);</span><br><span class="line">    extend(pkg, &#123;</span><br><span class="line">      devDependencies: &#123;</span><br><span class="line">        <span class="string">"webpack"</span>: <span class="string">"^3.0.0"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    pkg.keywords = pkg.keywords || [];</span><br><span class="line">    pkg.keywords.push(<span class="string">'generator-webpack-example'</span>);</span><br><span class="line"></span><br><span class="line">    pkg.name = <span class="keyword">this</span>.props.projectName;</span><br><span class="line">    pkg.description = <span class="keyword">this</span>.props.projectDesc;</span><br><span class="line">    pkg.main = <span class="keyword">this</span>.props.projectMain;</span><br><span class="line">    pkg.author = <span class="keyword">this</span>.props.projectAuthor;</span><br><span class="line">    pkg.license = <span class="keyword">this</span>.props.projectLicense;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.fs.writeJSON(<span class="keyword">this</span>.destinationPath(<span class="string">'package.json'</span>), pkg);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建dist目录</span></span><br><span class="line">    mkdirp(<span class="string">'dist'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写index.html</span></span><br><span class="line">    <span class="keyword">const</span> indexHtmlTpl = _.template(<span class="keyword">this</span>.fs.read(<span class="keyword">this</span>.templatePath(<span class="string">'index_tmpl.html'</span>)));</span><br><span class="line">    <span class="keyword">this</span>.fs.write(<span class="keyword">this</span>.destinationPath(<span class="string">'dist/index.html'</span>), indexHtmlTpl(&#123;</span><br><span class="line">      projectName: <span class="keyword">this</span>.props.projectName</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建src目录</span></span><br><span class="line">    mkdirp(<span class="string">'src'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写webpack.config.js</span></span><br><span class="line">    <span class="keyword">this</span>.fs.copy(</span><br><span class="line">      <span class="keyword">this</span>.templatePath(<span class="string">'webpack_tmpl.config.js'</span>),</span><br><span class="line">      <span class="keyword">this</span>.destinationPath(<span class="string">'webpack.config.js'</span>)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写index.js</span></span><br><span class="line">    <span class="keyword">this</span>.fs.copy(</span><br><span class="line">      <span class="keyword">this</span>.templatePath(<span class="string">'index_tmpl.js'</span>),</span><br><span class="line">      <span class="keyword">this</span>.destinationPath(<span class="string">'src/index.js'</span>)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>prompts.js用于存放输入信息指引的配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = [</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'projectName'</span>,</span><br><span class="line">    message: <span class="string">'Please input project name (webpack-example):'</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">'webpack-example'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'projectTitle'</span>,</span><br><span class="line">    message: <span class="string">'Please input project title (webpack示例):'</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">'webpack示例'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'projectDesc'</span>,</span><br><span class="line">    message: <span class="string">'Please input project description:'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'projectMain'</span>,</span><br><span class="line">    message: <span class="string">'Main file (src/index.js):'</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">'src/index.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    name: <span class="string">'projectAuthor'</span>,</span><br><span class="line">    message: <span class="string">'Author (yanyinhong):'</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">'yanyinhong'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">'list'</span>,</span><br><span class="line">    name: <span class="string">'projectLicense'</span>,</span><br><span class="line">    message: <span class="string">'Please choose license:'</span>,</span><br><span class="line">    choices: [<span class="string">'MIT'</span>, <span class="string">'ISC'</span>, <span class="string">'Apache-2.0'</span>, <span class="string">'AGPL-3.0'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>项目还没有通过NPM发布，可以先将项目链接到全局<code>Node</code>环境中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure></p>
+<p>然后，尝试执行命令<code>yo generator-name</code>。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yo webpack-example</span><br></pre></td></tr></table></figure>
+<p>根据提示步骤进行项目的构建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">? Please input project name (webpack-example): webpack-example</span><br><span class="line">? Please input project title (webpack示例): webpack示例</span><br><span class="line">? Please input project description:</span><br><span class="line">? Main file (src/index.js): src/index.js</span><br><span class="line">? Author (yanyinhong): yanyinhong</span><br><span class="line">? Please choose license: MIT</span><br><span class="line">Your generator must be inside a folder named webpack-example</span><br><span class="line">I&apos;ll automatically create this folder.</span><br><span class="line">   create README.md</span><br><span class="line">   create package.json</span><br><span class="line">   create dist\index.html</span><br><span class="line">   create webpack.config.js</span><br><span class="line">   create src\index.js</span><br></pre></td></tr></table></figure>
+<p>一个项目构建完成了！</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/yeoman/">yeoman</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Webpack-file-loader-set-introduction/"  data-tooltip="Webpack的几种文件loader介绍">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/30/The-difference-of-process-cwd-and-dirname/" data-tooltip="process.cwd()和__dirname的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Yan Yinhong. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/04/Webpack-file-loader-set-introduction/"  data-tooltip="Webpack的几种文件loader介绍">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/30/The-difference-of-process-cwd-and-dirname/" data-tooltip="process.cwd()和__dirname的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Yan Yinhong</h4>
+        
+            <div id="about-card-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Web工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                ShangHai
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/CSS-selector-cheat-sheet/">
+                            <h3 class="media-heading">常用CSS选择器速查表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>查看完整选择器列表，详见<a href="https://www.w3.org/TR/selectors/#selectors" target="_blank" rel="external">Selectors Level 3</a><br>PS: *选择器要慎用，因为它是<a href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/" target="_blank" rel="external">性能最低的一个CSS选择器</a>。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/SSH-connect-to-GitHub-in-windows/">
+                            <h3 class="media-heading">Windows下配置SSH连接Github</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用git协议推送本地代码到远程时，需要配置ssh连接到GitHub。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-generate-multi-ssh-keys/">
+                            <h3 class="media-heading">Git如何在本地生成多个SSH key</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在本地上传Git项目到远程时，本地需要对应的Git账户信息和允许连接的SSH key信息，远程才会允许上传。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/The-priority-of-npm-config/">
+                            <h3 class="media-heading">npm读取config配置的优先级</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>npm可以从多处读取npm的配置信息。不同地方的npm配置存在着优先级顺序。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-build-blog-with-hexo-and-github/">
+                            <h3 class="media-heading">Hexo博客搭建之使用Hexo+GitHub搭建个人博客</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>Hexo是时下比较流行的博客框架，有比较丰富的主题和插件支持。Github为用户提供了GitHub Pages，空间免费稳定，用来搭建一个博客是非常合适的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/Markdown-cheat-sheet/">
+                            <h3 class="media-heading">Markdown语法速记表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>markdown有很多衍生版本。附带了额外的markdown命令。下面介绍基本的markdown语法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之在文章中插入图片</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月2日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章时，常常有配图说明的需求。Hexo有多种图片插入方式，可以将图片存放在本地引用或者将图片放在CDN上引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/How-to-delete-useless-tags-and-categories/">
+                            <h3 class="media-heading">Hexo博客搭建之删除无用的tags和categories</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在发布文章后，有时候会发现标签或分类的描述不够准确，需要修改tags或者categories的内容。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Avoid-typing-password-when-git-push-remote/">
+                            <h3 class="media-heading">Git远程推送时记住用户名和密码</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用HTTPS协议推送代码到Git仓库时，发现每次都需要输入密码，操作起来非常麻烦。下面介绍几种免去输入密码的方法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Refer-article-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之引用站内文章</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章的过程中，有时候需要引用站内的其他文章。可以通过内置的标签插件的语法<code>post_link</code>来实现引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 26 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/07/03/How-create-a-yeoman-generator/';
+                 
+                    this.page.identifier = '2017/07/03/How-create-a-yeoman-generator/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('KCAEXVG15E', '93ced580bdba0ba50160ec6a6a11501a');
+        var algoliaIndex = algoliaClient.initIndex('yanyinhong_github_io');
+    </script>
+
+    </body>
+</html>

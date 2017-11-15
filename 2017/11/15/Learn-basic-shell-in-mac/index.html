@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="yanyinhong的个人博客">
+    <title>Mac OS下Shell的学习 - yanyinhong的个人博客</title>
+    <meta name="author" content="Yan Yinhong">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <meta name="description" content="Shell是Linux系统下的一个交互式工具，可以帮助用户启动程序、管理文件系统中的文件以及管理运行在系统上的进程。">
+<meta name="keywords" content="Mac,Shell">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Mac OS下Shell的学习">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/11/15/Learn-basic-shell-in-mac/index.html">
+<meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="Shell是Linux系统下的一个交互式工具，可以帮助用户启动程序、管理文件系统中的文件以及管理运行在系统上的进程。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-11-15T09:02:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac OS下Shell的学习">
+<meta name="twitter:description" content="Shell是Linux系统下的一个交互式工具，可以帮助用户启动程序、管理文件系统中的文件以及管理运行在系统上的进程。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-kdu6oj4zqgmizpyqjztwmdd3ijg97gexku6krhqkmzaqrxulpcdn0bpenolp.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-98343988-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="2">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">yanyinhong的个人博客</a>
+    </div>
+    
+        
+            <a  class="header-right-icon "
+                href="#about">
+        
+        
+            <i class="fa fa-lg fa-rss"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="2">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Yan Yinhong</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="2"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Mac OS下Shell的学习
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-11-15T16:45:40+08:00">
+	
+		    11月 15, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/前端/">前端</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Shell是Linux系统下的一个交互式工具，可以帮助用户启动程序、管理文件系统中的文件以及管理运行在系统上的进程。</p>
+<a id="more"></a>
+<p>用户可以通过输入命令来新建，复制，移动，删除文件等。还可以将多条命令写入文件中，通过执行这个脚本文件来进行操作。对开发人员来说，是一个帮忙提升工作效率的好工具。</p>
+<p>Mac的操作系统Mac OS是基于unix衍生来的系统，默认安装Shell。对应Windows下的cmd。下面记录一下Mac下Shell的常见使用方法。</p>
+<h2 id="调出Shell"><a href="#调出Shell" class="headerlink" title="调出Shell"></a>调出Shell</h2><p>通过Mac的Terminal使用Shell命令。</p>
+<h6 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h6><p>通过点击桌面下方Dock中的“Finder =》应用程序 =》终端”，调出终端窗口。</p>
+<h6 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h6><p>点击快捷键“command + 空格”，调出Spotlight。输入“终端”或“terminal”，回车，调出终端窗口。</p>
+<h2 id="Shell版本"><a href="#Shell版本" class="headerlink" title="Shell版本"></a>Shell版本</h2><p>Mac OS X 10.2之前默认的是C Shell，Mac OS X 10.3之后默认的是Bourne Shell。</p>
+<p>如果想确认系统的Shell版本，打开Mac的终端，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo $SHELL</span><br></pre></td></tr></table></figure></p>
+<p>如果输出结果是<code>csh</code>或者<code>tcsh</code>，那么系统安装的是C shell；如果输出结果是<code>base</code>，<code>sh</code>，<code>zsh</code>，那么系统安装的可能是Bourne Shell的一个变种。</p>
+<h2 id="文件系统结构"><a href="#文件系统结构" class="headerlink" title="文件系统结构"></a>文件系统结构</h2><p>Mac OS X是经过<a href="http://www.unix.org/unix03.html" target="_blank" rel="external">Unix03</a>认证的Unix系统。它的目录结构遵循Unix系统的文件结构，下面列举一些目录的顶层结构及功能。</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>虚拟目录的根目录。通常不会在这里存储文件</td>
+</tr>
+<tr>
+<td>/bin</td>
+<td>二进制目录，存放许多用户级的GNU工具</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>启动目录，存放启动文件</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>设备目录，Linux在这里创建设备节点</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>系统配置文件目录</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>主目录，Linux在这里创建用户目录</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>库目录，存放系统和应用程序的库文件</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>媒体目录，可移动媒体设备的常用挂载点</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>挂载目录，另一个可移动媒体设备的常用挂载点</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>可选目录，常用于存放第三方软件包和数据文件</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>进程目录，存放现有硬件及当前进程的相关信息</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>root用户的主目录</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>系统二进制目录，存放许多GNU管理员级工具</td>
+</tr>
+<tr>
+<td>/run</td>
+<td>运行目录，存放系统运作时的运行时数据</td>
+</tr>
+<tr>
+<td>/src</td>
+<td>服务目录，存放本地服务的相关文件</td>
+</tr>
+<tr>
+<td>/sys</td>
+<td>系统目录，存放系统硬件信息的相关文件</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时目录，可以在该目录中创建和删除临时工作文件</td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>用户二进制目录，大量用户级的GNU工具和数据文件都存储在这里</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>可变目录，用以存放经常变化的文件，比如日志文件</td>
+</tr>
+</tbody>
+</table>
+<p>常见的目录名都是基于文件系统层级标准（Filesystem Hierarchy Standard，FHS）的。FHS偶尔会有更新，如果想要查询最新标准，可以查询FHS官网：<a href="http://www.pathname.com/fhs" target="_blank" rel="external">http://www.pathname.com/fhs</a>。</p>
+<h2 id="Shell常用命令"><a href="#Shell常用命令" class="headerlink" title="Shell常用命令"></a>Shell常用命令</h2><p>使用<code>man</code>命令可以查询存储在系统上的命令手册页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查询 cd 命令的用法</span><br><span class="line">$ man cd</span><br></pre></td></tr></table></figure>
+<p>下面记录一些常用的命令</p>
+<table>
+<thead>
+<tr>
+<th>用法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cd www</td>
+<td>进入当前目录下的www</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>查询当前所在的目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>显示当前目录下的文件和目录</td>
+</tr>
+<tr>
+<td>ls -F</td>
+<td>在目录后加/，方便区分目录</td>
+</tr>
+<tr>
+<td>ls -a</td>
+<td>隐藏文件和显示文件一起显示</td>
+</tr>
+<tr>
+<td>ls -R</td>
+<td>递归显示文件，显示子目录下的文件</td>
+</tr>
+<tr>
+<td>ls -l</td>
+<td>显示文件的相关信息</td>
+</tr>
+<tr>
+<td>touch file</td>
+<td>创建名为file的文件。</td>
+</tr>
+<tr>
+<td>cp source destination</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>cp -R dir/ newdir</td>
+<td>递归复制dir目录中的内容到新目录newdir</td>
+</tr>
+<tr>
+<td>ln -s file sl_file</td>
+<td>创建符号链接sl_file，链接指向file</td>
+</tr>
+<tr>
+<td>ln file hl_file</td>
+<td>创建硬链接hl_file，链接指向file</td>
+</tr>
+<tr>
+<td>mv dir newdir</td>
+<td>重命名dir为newdir</td>
+</tr>
+<tr>
+<td>rm file -i</td>
+<td>删除文件file，并且在删除前询问</td>
+</tr>
+<tr>
+<td>rm dir -r</td>
+<td>删除目录中的文件以及目录本身</td>
+</tr>
+<tr>
+<td>rm dir -f</td>
+<td>强制删除</td>
+</tr>
+<tr>
+<td>file myfile</td>
+<td>查看文件的类型</td>
+</tr>
+<tr>
+<td>cat myfile</td>
+<td>查看整个文件</td>
+</tr>
+<tr>
+<td>cat myfile -n</td>
+<td>给文件的每个行加上行号</td>
+</tr>
+<tr>
+<td>cat myfile -b</td>
+<td>给有文本的行加上行号</td>
+</tr>
+<tr>
+<td>cat myfile -T</td>
+<td>不显示制表符</td>
+</tr>
+<tr>
+<td>more myfile</td>
+<td>按页显示文本</td>
+</tr>
+<tr>
+<td>less myfile</td>
+<td>按页显示文本，并提供更高级的特性</td>
+</tr>
+<tr>
+<td>tail myfile</td>
+<td>查看文件最后10行的内容</td>
+</tr>
+<tr>
+<td>tail myfile -n</td>
+<td>指定显示文本的行数</td>
+</tr>
+<tr>
+<td>tail myfile -f</td>
+<td>允许在其他进程使用该文件时查看文件的内容</td>
+</tr>
+<tr>
+<td>head myfile</td>
+<td>查看文件开头10行的内容</td>
+</tr>
+<tr>
+<td>head myfile -n</td>
+<td>指定显示文本的行数</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>如果file文件已经存在，<code>touch file</code>将修改file的修改时间，<code>touch file -a</code>则修改file的访问时间。</p>
+<p><code>ls -l</code>显示的时间是文件的修改时间，加上<code>--time=atime</code>参数就能够显示文件的访问时间了。</p>
+<p><code>cp src dest</code>时，如果目标文件已经存在，系统会默认覆盖。最好加上<code>-i</code>参数，强制shell询问是否覆盖已有文件。</p>
+<p><code>符号链接</code>是实实在在的文件，它指向文件结构中的另一个文件；<code>硬链接</code>会创建独立的虚拟文件，其中包含了原始文件的信息及位置，但是它们从根本上而言是同一个文件。</p>
+<p><code>rm dir -rf</code>命令可以递归并强制删除目录和目录中的文件。</p>
+<p><code>cat</code>将会展示所有的内容，不能停止进程。<code>more</code>和<code>less</code>则可以分页展示。</p>
+<p><code>tail</code>命令会保持活动状态，并不断显示添加到文件中的内容。这是实时监测系统日志的绝妙方式。</p>
+<p><code>head</code>不支持<code>-f</code>。</p>
+</blockquote>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Mac/">Mac</a> <a class="tag tag--primary tag--small t-link" href="/tags/Shell/">Shell</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/15/View-git-config/"  data-tooltip="Git学习之查看config配置">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/04/Frequently-used-less-mixins/" data-tooltip="整理常用的less mixins（持续更新）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Yan Yinhong. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/15/View-git-config/"  data-tooltip="Git学习之查看config配置">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/08/04/Frequently-used-less-mixins/" data-tooltip="整理常用的less mixins（持续更新）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Yan Yinhong</h4>
+        
+            <div id="about-card-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Web工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                ShangHai
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/CSS-selector-cheat-sheet/">
+                            <h3 class="media-heading">常用CSS选择器速查表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>查看完整选择器列表，详见<a href="https://www.w3.org/TR/selectors/#selectors" target="_blank" rel="external">Selectors Level 3</a><br>PS: *选择器要慎用，因为它是<a href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/" target="_blank" rel="external">性能最低的一个CSS选择器</a>。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/SSH-connect-to-GitHub-in-windows/">
+                            <h3 class="media-heading">Windows下配置SSH连接Github</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用git协议推送本地代码到远程时，需要配置ssh连接到GitHub。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-generate-multi-ssh-keys/">
+                            <h3 class="media-heading">Git如何在本地生成多个SSH key</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在本地上传Git项目到远程时，本地需要对应的Git账户信息和允许连接的SSH key信息，远程才会允许上传。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/The-priority-of-npm-config/">
+                            <h3 class="media-heading">npm读取config配置的优先级</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>npm可以从多处读取npm的配置信息。不同地方的npm配置存在着优先级顺序。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-build-blog-with-hexo-and-github/">
+                            <h3 class="media-heading">Hexo博客搭建之使用Hexo+GitHub搭建个人博客</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>Hexo是时下比较流行的博客框架，有比较丰富的主题和插件支持。Github为用户提供了GitHub Pages，空间免费稳定，用来搭建一个博客是非常合适的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/Markdown-cheat-sheet/">
+                            <h3 class="media-heading">Markdown语法速记表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>markdown有很多衍生版本。附带了额外的markdown命令。下面介绍基本的markdown语法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之在文章中插入图片</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月2日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章时，常常有配图说明的需求。Hexo有多种图片插入方式，可以将图片存放在本地引用或者将图片放在CDN上引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/How-to-delete-useless-tags-and-categories/">
+                            <h3 class="media-heading">Hexo博客搭建之删除无用的tags和categories</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在发布文章后，有时候会发现标签或分类的描述不够准确，需要修改tags或者categories的内容。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Avoid-typing-password-when-git-push-remote/">
+                            <h3 class="media-heading">Git远程推送时记住用户名和密码</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用HTTPS协议推送代码到Git仓库时，发现每次都需要输入密码，操作起来非常麻烦。下面介绍几种免去输入密码的方法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Refer-article-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之引用站内文章</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章的过程中，有时候需要引用站内的其他文章。可以通过内置的标签插件的语法<code>post_link</code>来实现引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 26 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/11/15/Learn-basic-shell-in-mac/';
+                 
+                    this.page.identifier = '2017/11/15/Learn-basic-shell-in-mac/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('KCAEXVG15E', '93ced580bdba0ba50160ec6a6a11501a');
+        var algoliaIndex = algoliaClient.initIndex('yanyinhong_github_io');
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="yanyinhong的个人博客">
+    <title>Vue源码学习之Vue构造器结构 - yanyinhong的个人博客</title>
+    <meta name="author" content="Yan Yinhong">
+    
+        <meta name="keywords" content="hexo,javascript,">
+    
+    
+    
+    <meta name="description" content="Vue项目的构建是从new Vue(options)开始的，也就是说Vue是提供了一个构造器来供项目实例化。下面记录一下Vue构造器的结构和功能。">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Vue源码学习之Vue构造器结构">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/05/21/Vue-constructor-struct/index.html">
+<meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="Vue项目的构建是从new Vue(options)开始的，也就是说Vue是提供了一个构造器来供项目实例化。下面记录一下Vue构造器的结构和功能。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-11-15T07:42:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue源码学习之Vue构造器结构">
+<meta name="twitter:description" content="Vue项目的构建是从new Vue(options)开始的，也就是说Vue是提供了一个构造器来供项目实例化。下面记录一下Vue构造器的结构和功能。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-kdu6oj4zqgmizpyqjztwmdd3ijg97gexku6krhqkmzaqrxulpcdn0bpenolp.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-98343988-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="2">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">yanyinhong的个人博客</a>
+    </div>
+    
+        
+            <a  class="header-right-icon "
+                href="#about">
+        
+        
+            <i class="fa fa-lg fa-rss"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="2">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Yan Yinhong</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="2"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Vue源码学习之Vue构造器结构
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-05-21T23:07:10+08:00">
+	
+		    5月 21, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/前端/">前端</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Vue项目的构建是从<code>new Vue(options)</code>开始的，也就是说Vue是提供了一个构造器来供项目实例化。下面记录一下Vue构造器的结构和功能。</p>
+<a id="more"></a>
+<h4 id="Vue构造器"><a href="#Vue构造器" class="headerlink" title="Vue构造器"></a>Vue构造器</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><figure class="highlight javascript"><figcaption><span>core/instance/index.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/index.js" target="_blank" rel="external">index.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数执行初始化任务</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span> (<span class="params">options</span>) </span>&#123; <span class="keyword">this</span>._init(options)&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="mixin-init"><a href="#mixin-init" class="headerlink" title="mixin init"></a>mixin init</h5><figure class="highlight javascript"><figcaption><span>core/instance/init.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/init.js" target="_blank" rel="external">init.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化方法</span></span><br><span class="line">Vue.prototype._init = <span class="function"><span class="keyword">function</span> (<span class="params">options?: Object</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="mixin-state"><a href="#mixin-state" class="headerlink" title="mixin state"></a>mixin state</h5><figure class="highlight javascript"><figcaption><span>core/instance/state.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/state.js" target="_blank" rel="external">state.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vm._data的代理属性</span></span><br><span class="line">Vue.prototype.$data = &#123;<span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"> return this._data</span>)&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">// <span class="title">vm</span>.<span class="title">_props</span>的代理属性</span></span><br><span class="line"><span class="function"><span class="title">Vue</span>.<span class="title">prototype</span>.<span class="title">$props</span> = </span>&#123;get: <span class="function"><span class="keyword">function</span> (<span class="params"> return this._props</span>)&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">// 设置对象的属性值</span></span><br><span class="line"><span class="function"><span class="title">Vue</span>.<span class="title">prototype</span>.<span class="title">$set</span> = <span class="title">function</span> (<span class="params">target: Array&lt;any&gt; | Object, key: any, val: any</span>): <span class="title">any</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除对象的属性</span></span><br><span class="line">Vue.prototype.$<span class="keyword">delete</span> = <span class="function"><span class="keyword">function</span> (<span class="params">target: Array&lt;any&gt; | Object, key: any</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听表达式依赖的值</span></span><br><span class="line">Vue.prototype.$watch = <span class="function"><span class="keyword">function</span> (<span class="params">expOrFn: string | Function, cb: any, options?: Object</span>): <span class="title">Function</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="mixin-events"><a href="#mixin-events" class="headerlink" title="mixin events"></a>mixin events</h5><figure class="highlight javascript"><figcaption><span>core/instance/events.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/events.js" target="_blank" rel="external">events.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册事件</span></span><br><span class="line">Vue.prototype.$on = <span class="function"><span class="keyword">function</span> (<span class="params">event: string | Array&lt;string&gt;, fn: Function</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册一次性事件</span></span><br><span class="line">Vue.prototype.$once = <span class="function"><span class="keyword">function</span> (<span class="params">event: string, fn: Function</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注销事件</span></span><br><span class="line">Vue.prototype.$off = <span class="function"><span class="keyword">function</span> (<span class="params">event?: string | Array&lt;string&gt;, fn?: Function</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发事件</span></span><br><span class="line">Vue.prototype.$emit = <span class="function"><span class="keyword">function</span> (<span class="params">event: string</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="mixin-lifecycle"><a href="#mixin-lifecycle" class="headerlink" title="mixin lifecycle"></a>mixin lifecycle</h5><figure class="highlight javascript"><figcaption><span>core/instance/lifecycle.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/lifecycle.js" target="_blank" rel="external">lifecycle.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更新vm中的VNode</span></span><br><span class="line">Vue.prototype._update = <span class="function"><span class="keyword">function</span> (<span class="params">vnode: VNode, hydrating?: boolean</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 强制更新（触发vm._watchers的更新操作）</span></span><br><span class="line">Vue.prototype.$forceUpdate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁vm</span></span><br><span class="line">Vue.prototype.$destroy = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="mixin-render"><a href="#mixin-render" class="headerlink" title="mixin render"></a>mixin render</h5><figure class="highlight javascript"><figcaption><span>core/instance/render.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/instance/render.js" target="_blank" rel="external">render.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 延迟任务的执行</span></span><br><span class="line">Vue.prototype.$nextTick = <span class="function"><span class="keyword">function</span> (<span class="params">fn: Function</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染</span></span><br><span class="line">Vue.prototype._render = <span class="function"><span class="keyword">function</span> (<span class="params"></span>): <span class="title">VNode</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一些工具函数</span></span><br><span class="line">Vue.prototype._o = markOnce</span><br><span class="line">Vue.prototype._n = toNumber</span><br><span class="line">Vue.prototype._s = toString</span><br><span class="line">Vue.prototype._l = renderList</span><br><span class="line">Vue.prototype._t = renderSlot</span><br><span class="line">Vue.prototype._q = looseEqual</span><br><span class="line">Vue.prototype._i = looseIndexOf</span><br><span class="line">Vue.prototype._m = renderStatic</span><br><span class="line">Vue.prototype._f = resolveFilter</span><br><span class="line">Vue.prototype._k = checkKeyCodes</span><br><span class="line">Vue.prototype._b = bindObjectProps</span><br><span class="line">Vue.prototype._v = createTextVNode</span><br><span class="line">Vue.prototype._e = createEmptyVNode</span><br><span class="line">Vue.prototype._u = resolveScopedSlots</span><br></pre></td></tr></table></figure>
+<h5 id="global-api"><a href="#global-api" class="headerlink" title="global api"></a>global api</h5><figure class="highlight javascript"><figcaption><span>core/global-api/index.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/global-api/index.js" target="_blank" rel="external">index.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过get获取配置信息</span></span><br><span class="line">Vue.config = &#123;</span><br><span class="line">    get: <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="keyword">return</span> config&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提供工具函数</span></span><br><span class="line">Vue.util = &#123;</span><br><span class="line">    warn,</span><br><span class="line">    extend,</span><br><span class="line">    mergeOptions,</span><br><span class="line">    defineReactive</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提供设置属性、删除属性、异步执行任务的API</span></span><br><span class="line">Vue.set = set</span><br><span class="line">Vue.delete = del</span><br><span class="line">Vue.nextTick = nextTick</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置options</span></span><br><span class="line">Vue.options = &#123;</span><br><span class="line">    component: &#123;KeepAlive&#125;,</span><br><span class="line">    directive: &#123;&#125;,</span><br><span class="line">    filter: &#123;&#125;,</span><br><span class="line">    _base: Vue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安装Vue plugin</span></span><br><span class="line">Vue.use = <span class="function"><span class="keyword">function</span> (<span class="params">plugin: Function | Object</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混入mixin中的对象到vm.options中</span></span><br><span class="line">Vue.mixin = <span class="function"><span class="keyword">function</span> (<span class="params">mixin: Object</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成子Vue构造器</span></span><br><span class="line">Vue.cid = <span class="number">0</span></span><br><span class="line">Vue.extend = <span class="function"><span class="keyword">function</span> (<span class="params">extendOptions: Object</span>): <span class="title">Function</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取或定义component/directive/filter</span></span><br><span class="line">Vue.component = <span class="function"><span class="keyword">function</span> (<span class="params">id: string, definition: Function | Object</span>): <span class="title">Function</span> | <span class="title">Object</span> | <span class="title">void</span> </span>&#123;&#125;;</span><br><span class="line">Vue.directive = <span class="function"><span class="keyword">function</span> (<span class="params">id: string, definition: Function | Object</span>): <span class="title">Function</span> | <span class="title">Object</span> | <span class="title">void</span> </span>&#123;&#125;;</span><br><span class="line">Vue.filter = <span class="function"><span class="keyword">function</span> (<span class="params">id: string, definition: Function | Object</span>): <span class="title">Function</span> | <span class="title">Object</span> | <span class="title">void</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中config中有如下配置</p>
+<figure class="highlight javascript"><figcaption><span>core/config.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/config.js" target="_blank" rel="external">config.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Type config = &#123;</span><br><span class="line">    <span class="comment">// user</span></span><br><span class="line">    optionMergeStrategies: &#123; [key: string]: <span class="built_in">Function</span> &#125;;</span><br><span class="line">    silent: boolean;</span><br><span class="line">    productionTip: boolean;</span><br><span class="line">    performance: boolean;</span><br><span class="line">    devtools: boolean;</span><br><span class="line">    errorHandler: ?<span class="function">(<span class="params">err: <span class="built_in">Error</span>, vm: Component, info: string</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">    ignoredElements: <span class="built_in">Array</span>&lt;string&gt;;</span><br><span class="line">    keyCodes: &#123; [key: string]: number | <span class="built_in">Array</span>&lt;number&gt; &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// platform</span></span><br><span class="line">    isReservedTag: <span class="function">(<span class="params">x?: string</span>) =&gt;</span> boolean;</span><br><span class="line">    isReservedAttr: <span class="function">(<span class="params">x?: string</span>) =&gt;</span> boolean;</span><br><span class="line">    parsePlatformTagName: <span class="function">(<span class="params">x: string</span>) =&gt;</span> string;</span><br><span class="line">    isUnknownElement: <span class="function">(<span class="params">x?: string</span>) =&gt;</span> boolean;</span><br><span class="line">    getTagNamespace: <span class="function">(<span class="params">x?: string</span>) =&gt;</span> string | <span class="keyword">void</span>;</span><br><span class="line">    mustUseProp: <span class="function">(<span class="params">tag: string, type: ?string, name: string</span>) =&gt;</span> boolean;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// legacy</span></span><br><span class="line">    _lifecycleHooks: <span class="built_in">Array</span>&lt;string&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="platform"><a href="#platform" class="headerlink" title="platform"></a>platform</h5><figure class="highlight javascript"><figcaption><span>platforms/web/runtime-with-compiler.js</span><a href="https://unpkg.com/vue@2.3.3/src/platforms/web/runtime-with-compiler.js" target="_blank" rel="external">runtime-with-compiler.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更新元素</span></span><br><span class="line">Vue.prototype.__patch__ = <span class="function"><span class="keyword">function</span> (<span class="params">oldVnode, vnode, hydrating, removeOnly, parentElm, refElm</span>): <span class="title">DomElement</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 挂载元素</span></span><br><span class="line">Vue.prototype.$mount = <span class="function"><span class="keyword">function</span> (<span class="params">el?: string | Element, hydrating?: boolean</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译模板，生成渲染函数</span></span><br><span class="line">Vue.compile = (template: string, options?: CompilerOptions, vm?: Component): CompiledFunctionResult &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="other"><a href="#other" class="headerlink" title="other"></a>other</h5><figure class="highlight javascript"><figcaption><span>core/index.js</span><a href="https://unpkg.com/vue@2.3.3/src/core/index.js" target="_blank" rel="external">index.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标识是否处于服务器端渲染</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$isServer'</span>, &#123;</span><br><span class="line">  get: isServerRendering</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 暴露$vnode的ssrContext上下文</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$ssrContext'</span>, &#123;</span><br><span class="line">  get () &#123;</span><br><span class="line">    <span class="comment">/* istanbul ignore next */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$vnode.ssrContext</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 记录Vue的版本</span></span><br><span class="line">Vue.version = <span class="string">'__VERSION__'</span></span><br></pre></td></tr></table></figure>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Vue/">Vue</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/30/Support-ES6-for-nodejs/"  data-tooltip="如何让Node.js支持ES6的语法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/09/React-createClass/" data-tooltip="React学习之React.createClass构造React Component">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Yan Yinhong. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/30/Support-ES6-for-nodejs/"  data-tooltip="如何让Node.js支持ES6的语法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/09/React-createClass/" data-tooltip="React学习之React.createClass构造React Component">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="http://res.cloudinary.com/yanyinhong/image/upload/v1493627330/timg_m7opnt.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Yan Yinhong</h4>
+        
+            <div id="about-card-bio"><p>Web工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Web工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                ShangHai
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/CSS-selector-cheat-sheet/">
+                            <h3 class="media-heading">常用CSS选择器速查表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>查看完整选择器列表，详见<a href="https://www.w3.org/TR/selectors/#selectors" target="_blank" rel="external">Selectors Level 3</a><br>PS: *选择器要慎用，因为它是<a href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/" target="_blank" rel="external">性能最低的一个CSS选择器</a>。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/04/30/SSH-connect-to-GitHub-in-windows/">
+                            <h3 class="media-heading">Windows下配置SSH连接Github</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用git协议推送本地代码到远程时，需要配置ssh连接到GitHub。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-generate-multi-ssh-keys/">
+                            <h3 class="media-heading">Git如何在本地生成多个SSH key</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在本地上传Git项目到远程时，本地需要对应的Git账户信息和允许连接的SSH key信息，远程才会允许上传。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/The-priority-of-npm-config/">
+                            <h3 class="media-heading">npm读取config配置的优先级</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>npm可以从多处读取npm的配置信息。不同地方的npm配置存在着优先级顺序。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/How-to-build-blog-with-hexo-and-github/">
+                            <h3 class="media-heading">Hexo博客搭建之使用Hexo+GitHub搭建个人博客</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>Hexo是时下比较流行的博客框架，有比较丰富的主题和插件支持。Github为用户提供了GitHub Pages，空间免费稳定，用来搭建一个博客是非常合适的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/01/Markdown-cheat-sheet/">
+                            <h3 class="media-heading">Markdown语法速记表</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>markdown有很多衍生版本。附带了额外的markdown命令。下面介绍基本的markdown语法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之在文章中插入图片</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月2日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章时，常常有配图说明的需求。Hexo有多种图片插入方式，可以将图片存放在本地引用或者将图片放在CDN上引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/How-to-delete-useless-tags-and-categories/">
+                            <h3 class="media-heading">Hexo博客搭建之删除无用的tags和categories</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在发布文章后，有时候会发现标签或分类的描述不够准确，需要修改tags或者categories的内容。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Avoid-typing-password-when-git-push-remote/">
+                            <h3 class="media-heading">Git远程推送时记住用户名和密码</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>当使用HTTPS协议推送代码到Git仓库时，发现每次都需要输入密码，操作起来非常麻烦。下面介绍几种免去输入密码的方法。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://yanyinhong.github.io/2017/05/03/Refer-article-in-hexo-post/">
+                            <h3 class="media-heading">Hexo博客搭建之引用站内文章</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在写文章的过程中，有时候需要引用站内的其他文章。可以通过内置的标签插件的语法<code>post_link</code>来实现引用。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 26 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/05/21/Vue-constructor-struct/';
+                 
+                    this.page.identifier = '2017/05/21/Vue-constructor-struct/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('KCAEXVG15E', '93ced580bdba0ba50160ec6a6a11501a');
+        var algoliaIndex = algoliaClient.initIndex('yanyinhong_github_io');
+    </script>
+
+    </body>
+</html>

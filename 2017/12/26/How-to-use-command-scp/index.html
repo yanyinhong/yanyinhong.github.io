@@ -6,21 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yanyinhong的个人博客">
-    <title>标签: less - yanyinhong的个人博客</title>
+    <title>Mac OS下使用scp命令上传下载文件 - yanyinhong的个人博客</title>
     <meta name="author" content="Yan Yinhong">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <meta name="keywords" content="hexo,javascript">
+    <meta name="description" content="Mac OS的shell自带命令scp，可以通过scp来上传和下载文件。">
+<meta name="keywords" content="Shell">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yanyinhong的个人博客">
-<meta property="og:url" content="http://yanyinhong.github.io/tags/less/index.html">
+<meta property="og:title" content="Mac OS下使用scp命令上传下载文件">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/12/26/How-to-use-command-scp/index.html">
 <meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="Mac OS的shell自带命令scp，可以通过scp来上传和下载文件。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-26T02:47:28.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yanyinhong的个人博客">
+<meta name="twitter:title" content="Mac OS下使用scp命令上传下载文件">
+<meta name="twitter:description" content="Mac OS的shell自带命令scp，可以通过scp来上传和下载文件。">
     
     
         
@@ -182,60 +186,119 @@
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/08/04/Frequently-used-less-mixins/">
-                            整理常用的less mixins（持续更新）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-08-04T00:09:48+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Mac OS下使用scp命令上传下载文件
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-26T10:44:08+08:00">
 	
-		    8月 04, 2017
+		    12月 26, 2017
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/前端/">前端</a>
+    <a class="category-link" href="/categories/工具/">工具</a>
 
 
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>在写移动端页面的样式时，常常会涉及一些通用的样式书写，并用mixins将它们封装起来调用。下面介绍下开发过程中一些常用的mixins实现。</p>
-                    
-                        <a href="/2017/08/04/Frequently-used-less-mixins/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Mac OS的shell自带命令scp，可以通过scp来上传和下载文件。</p>
+<a id="more"></a>
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r local_folder remote_username@remote_ip:remote_folder</span><br></pre></td></tr></table></figure>
+<p>其中，<code>local_folder</code>是源地址，<code>remote_username@remote_ip:remote_folder</code>是目标地址。命令会将源地址的内容上传到目标地址。</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r remote_username@remote_ip:remote_folder local_folder</span><br></pre></td></tr></table></figure>
+<p>下载和上床对应，将2个参数互换顺序就可以。</p>
+<h3 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h3><p>有一些好用的scp命令参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.-v 显示进度</span><br><span class="line">2.-r 递归处理</span><br><span class="line">3.-C 压缩选项</span><br><span class="line">4.-P 选择端口</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-p</code>已经被rcp使用。</p>
+</blockquote>
+<p>更多参数可以通过命令<code>man scp</code>来查看。</p>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Shell/">Shell</a>
+
+            </div>
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-lrzsz/"  data-tooltip="Mac OS下使用rz和sz上传下载文件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-brew/" data-tooltip="Mac OS下brew的安装和使用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -245,6 +308,62 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-lrzsz/"  data-tooltip="Mac OS下使用rz和sz上传下载文件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-brew/" data-tooltip="Mac OS下brew的安装和使用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -512,6 +631,25 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/12/26/How-to-use-command-scp/';
+                 
+                    this.page.identifier = '2017/12/26/How-to-use-command-scp/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>

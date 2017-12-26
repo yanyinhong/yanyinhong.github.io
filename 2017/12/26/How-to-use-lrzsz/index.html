@@ -6,21 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yanyinhong的个人博客">
-    <title>标签: less - yanyinhong的个人博客</title>
+    <title>Mac OS下使用rz和sz上传下载文件 - yanyinhong的个人博客</title>
     <meta name="author" content="Yan Yinhong">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <meta name="keywords" content="hexo,javascript">
+    <meta name="description" content="开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。">
+<meta name="keywords" content="Shell">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yanyinhong的个人博客">
-<meta property="og:url" content="http://yanyinhong.github.io/tags/less/index.html">
+<meta property="og:title" content="Mac OS下使用rz和sz上传下载文件">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/12/26/How-to-use-lrzsz/index.html">
 <meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-26T02:47:51.240Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yanyinhong的个人博客">
+<meta name="twitter:title" content="Mac OS下使用rz和sz上传下载文件">
+<meta name="twitter:description" content="开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。">
     
     
         
@@ -182,60 +186,126 @@
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/08/04/Frequently-used-less-mixins/">
-                            整理常用的less mixins（持续更新）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-08-04T00:09:48+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Mac OS下使用rz和sz上传下载文件
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-26T10:46:49+08:00">
 	
-		    8月 04, 2017
+		    12月 26, 2017
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/前端/">前端</a>
+    <a class="category-link" href="/categories/工具/">工具</a>
 
 
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>在写移动端页面的样式时，常常会涉及一些通用的样式书写，并用mixins将它们封装起来调用。下面介绍下开发过程中一些常用的mixins实现。</p>
-                    
-                        <a href="/2017/08/04/Frequently-used-less-mixins/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。</p>
+<a id="more"></a>
+<p>window上可以用rx，sz命令上传，下载文件，mac下也可以。下面介绍一下Mac OS下如何配置rz，sz。</p>
+<h3 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h3><p><a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="external">brew</a>是Mac OS上的一个包管理工具，可以使用它来安装接下来要使用到的iTerm，wget等工具。</p>
+<p>Mac默认安装了ruby，打开终端执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Homebrew安装成功后，会自动创建目录 /usr/local/Cellar 来存放Homebrew安装的程序。 这时就可以在命令行状态下面就可以使用 brew 命令了.</p>
+<h3 id="安装iTerm2"><a href="#安装iTerm2" class="headerlink" title="安装iTerm2"></a>安装iTerm2</h3><p><a href="https://www.iterm2.com/" target="_blank" rel="external">iTerm</a>是一个Mac下的终端工具，非常好用的命令行工具。Mac自带的终端是不支持lrzsz的，需要先下载支持它的iterms。</p>
+<p>从官网下载，在本地解压，并将文件拖入Applications，安装完成。</p>
+<h3 id="安装lrzsz"><a href="#安装lrzsz" class="headerlink" title="安装lrzsz"></a>安装lrzsz</h3><p>lrzsz是一款在linux里可代替ftp上传和下载的程序。它使用unix通信套件提供的X，Y，和ZModem文件传输协议。通过下载它来使用rz，sz。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install lrzsz</span><br></pre></td></tr></table></figure>
+<h3 id="安装wget"><a href="#安装wget" class="headerlink" title="安装wget"></a>安装wget</h3><p>下载lrzsz之后，需要使用<code>wget</code>下载iterm2-zmodem。Mac默认不安装wget，可以通过brew安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br></pre></td></tr></table></figure></p>
+<h3 id="下载iterm2-zmodem"><a href="#下载iterm2-zmodem" class="headerlink" title="下载iterm2-zmodem"></a>下载iterm2-zmodem</h3><p>在iTerm2中使用Zmodem传输文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/bin</span><br><span class="line"></span><br><span class="line">wget https://raw.github.com/mmastrac/iterm2-zmodem/master/iterm2-send-zmodem.sh</span><br><span class="line"></span><br><span class="line">wget https://raw.github.com/mmastrac/iterm2-zmodem/master/iterm2-recv-zmodem.sh</span><br><span class="line"></span><br><span class="line">chmod 777 /usr/local/bin/iterm2-*</span><br></pre></td></tr></table></figure>
+<p>如果命令需要权限，尝试在命令前面加上<code>sudo</code>。</p>
+<h3 id="添加trigger"><a href="#添加trigger" class="headerlink" title="添加trigger"></a>添加trigger</h3><p>打开一个iTerm终端，点击菜单的Profiles，选择某个profile之后然后继续选择advanced → triggers，添加triggers。</p>
+<p>Regular expression|Action|Action<br>|—|—|—|<br>|**B0100|Run Silent Coprocess|/usr/local/bin/iterm2-send-zmodem.sh|<br>|**B00000000000000|Run Silent Coprocess|/usr/local/bin/iterm2-recv-zmodem.sh|</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>重启iterm2，连接远程Linux，输入rz命令尝试一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh username@remote.mechine.com</span><br><span class="line">rz</span><br></pre></td></tr></table></figure>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://xfhnever.com/2015/09/04/mac-rzsz/" target="_blank" rel="external">Mac(二)- Mac下使用rz、sz</a><br><a href="http://codelife.me/blog/2013/03/02/zmodem-integration-for-iterm2/" target="_blank" rel="external">在iTerm2中使用Zmodem传输文件</a></p>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Shell/">Shell</a>
+
+            </div>
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-command-scp/" data-tooltip="Mac OS下使用scp命令上传下载文件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -245,6 +315,62 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-command-scp/" data-tooltip="Mac OS下使用scp命令上传下载文件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -512,6 +638,25 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/12/26/How-to-use-lrzsz/';
+                 
+                    this.page.identifier = '2017/12/26/How-to-use-lrzsz/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>

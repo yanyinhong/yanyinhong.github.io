@@ -6,21 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yanyinhong的个人博客">
-    <title>标签: less - yanyinhong的个人博客</title>
+    <title>Mac OS下brew的安装和使用 - yanyinhong的个人博客</title>
     <meta name="author" content="Yan Yinhong">
     
         <meta name="keywords" content="hexo,javascript,">
     
     
     
-    <meta name="keywords" content="hexo,javascript">
+    <meta name="description" content="Homebrew是一款Mac OS上的软件包管理工具，通过它可以很方便的安装/卸载软件工具等，类似于Linux下的apt-get，node的npm等包管理工具。">
+<meta name="keywords" content="Homebrew">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yanyinhong的个人博客">
-<meta property="og:url" content="http://yanyinhong.github.io/tags/less/index.html">
+<meta property="og:title" content="Mac OS下brew的安装和使用">
+<meta property="og:url" content="http://yanyinhong.github.io/2017/12/26/How-to-use-brew/index.html">
 <meta property="og:site_name" content="yanyinhong的个人博客">
+<meta property="og:description" content="Homebrew是一款Mac OS上的软件包管理工具，通过它可以很方便的安装/卸载软件工具等，类似于Linux下的apt-get，node的npm等包管理工具。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-26T02:42:15.615Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yanyinhong的个人博客">
+<meta name="twitter:title" content="Mac OS下brew的安装和使用">
+<meta name="twitter:description" content="Homebrew是一款Mac OS上的软件包管理工具，通过它可以很方便的安装/卸载软件工具等，类似于Linux下的apt-get，node的npm等包管理工具。">
     
     
         
@@ -182,60 +186,240 @@
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/08/04/Frequently-used-less-mixins/">
-                            整理常用的less mixins（持续更新）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-08-04T00:09:48+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Mac OS下brew的安装和使用
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-26T10:37:36+08:00">
 	
-		    8月 04, 2017
+		    12月 26, 2017
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/前端/">前端</a>
+    <a class="category-link" href="/categories/工具/">工具</a>
 
 
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>在写移动端页面的样式时，常常会涉及一些通用的样式书写，并用mixins将它们封装起来调用。下面介绍下开发过程中一些常用的mixins实现。</p>
-                    
-                        <a href="/2017/08/04/Frequently-used-less-mixins/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="external">Homebrew</a>是一款Mac OS上的软件包管理工具，通过它可以很方便的安装/卸载软件工具等，类似于Linux下的apt-get，node的npm等包管理工具。</p>
+<a id="more"></a>
+<p>Homebrew将工具安装在自己创建的/usr/local/Cellar目录下，并在/usr/local/bin建立这些工具的符号链接。</p>
+<h3 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h3><p>打开终端，执行下面的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>Mac OS默认安装了ruby，通过ruby可以成功安装Homebrew。</p>
+<h3 id="使用命令"><a href="#使用命令" class="headerlink" title="使用命令"></a>使用命令</h3><h4 id="通用类"><a href="#通用类" class="headerlink" title="通用类"></a>通用类</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brew search [TEXT\</td>
+<td>/REGEX/]</td>
+<td>搜索软件</td>
+</tr>
+<tr>
+<td>brew (info\</td>
+<td>home\</td>
+<td>options)  [FORMULA…]</td>
+<td>查询软件信息</td>
+</tr>
+<tr>
+<td>brew install FORMULA…</td>
+<td>安装软件</td>
+</tr>
+<tr>
+<td>brew update</td>
+<td>更新brew和所有软件包</td>
+</tr>
+<tr>
+<td>brew upgrade [FORMULA…]</td>
+<td>更新软件包</td>
+</tr>
+<tr>
+<td>brew uninstall FORMULA…</td>
+<td>卸载软件包</td>
+</tr>
+<tr>
+<td>brew list [FORMULA…]</td>
+<td>罗列所有已安装的软件包</td>
+</tr>
+<tr>
+<td>brew outdated</td>
+<td>查看哪些软件包需要更新</td>
+</tr>
+<tr>
+<td>brew deps FORMULA</td>
+<td>显示包依赖</td>
+</tr>
+</tbody>
+</table>
+<h4 id="帮助类"><a href="#帮助类" class="headerlink" title="帮助类"></a>帮助类</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>man brew</td>
+<td>查询brew命令的使用手册</td>
+</tr>
+<tr>
+<td>brew help [COMMAND</td>
+<td>查询brew子命令的使用帮助，如brew help search</td>
+</tr>
+</tbody>
+</table>
+<h4 id="排查类"><a href="#排查类" class="headerlink" title="排查类"></a>排查类</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brew config</td>
+<td>查看brew的全局配置</td>
+</tr>
+<tr>
+<td>brew doctor</td>
+<td>检查系统的潜在问题</td>
+</tr>
+<tr>
+<td>brew install -vd FORMULA</td>
+<td>安装软件包打印详细信息，并开启debug功能。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="开发者类"><a href="#开发者类" class="headerlink" title="开发者类"></a>开发者类</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brew create [URL [–no-fetch]]</td>
+<td>创建软件包</td>
+</tr>
+<tr>
+<td>brew edit [FORMULA…]</td>
+<td>编辑软件包源码</td>
+</tr>
+</tbody>
+</table>
+<p>更多命令使用查看文档：<a href="https://docs.brew.sh/Formula-Cookbook.html" target="_blank" rel="external">https://docs.brew.sh/Formula-Cookbook.html</a>.</p>
+<blockquote>
+<p>brew安装程序的过程中需要用到苹果的Xcode中的编译器，Xcode可以到App Store中免费下载安装。</p>
+</blockquote>
+<h3 id="卸载brew"><a href="#卸载brew" class="headerlink" title="卸载brew"></a>卸载brew</h3><p>在终端执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br></pre></td></tr></table></figure>
+<p>详细信息查看：<a href="https://docs.brew.sh/FAQ.html" target="_blank" rel="external">https://docs.brew.sh/FAQ.html</a></p>
+<h3 id="推荐软件包"><a href="#推荐软件包" class="headerlink" title="推荐软件包"></a>推荐软件包</h3><ul>
+<li><a href="https://www.gnu.org/software/coreutils" target="_blank" rel="external">coreutils</a></li>
+<li><a href="https://openssl.org/" target="_blank" rel="external">openssl</a></li>
+<li><a href="https://tukaani.org/xz/" target="_blank" rel="external">xz</a></li>
+<li><a href="https://www.gnu.org/software/wget/" target="_blank" rel="external">wget</a></li>
+<li><a href="http://www.ohse.de/uwe/software/lrzsz.html" target="_blank" rel="external">lrzsz</a></li>
+</ul>
+<blockquote>
+<p>软件包的更多详细信息可以通过<code>brew info 软件包名</code>或者<code>brew home 软件包名</code>来查看。</p>
+</blockquote>
+<h3 id="brew的同类产品"><a href="#brew的同类产品" class="headerlink" title="brew的同类产品"></a>brew的同类产品</h3><ul>
+<li><a href="http://www.macports.org/" target="_blank" rel="external">MacPorts</a></li>
+</ul>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Homebrew/">Homebrew</a>
+
+            </div>
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-command-scp/"  data-tooltip="Mac OS下使用scp命令上传下载文件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/15/Resolve-npm-missing-write-access-problem/" data-tooltip="Mac下安装npm全局包提示权限不够">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -245,6 +429,62 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/How-to-use-command-scp/"  data-tooltip="Mac OS下使用scp命令上传下载文件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/15/Resolve-npm-missing-write-access-problem/" data-tooltip="Mac下安装npm全局包提示权限不够">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -512,6 +752,25 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-mxuamm2fsz7l9ev8krc7ongw21qu5p000z4uqqkg8mtluljeg6fenrxuiiug.min.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yanyinhong.github.io/2017/12/26/How-to-use-brew/';
+                 
+                    this.page.identifier = '2017/12/26/How-to-use-brew/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'yanyinhong';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="yanyinhong的个人博客">
 <meta property="og:description" content="开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-12-26T02:47:51.240Z">
+<meta property="og:updated_time" content="2017-12-26T06:13:54.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac OS下使用rz和sz上传下载文件">
 <meta name="twitter:description" content="开发人员在开发时有时会遇到需要在本机和开发机之间传文件的问题。虽然mac下的scp命令可以完成文件的上传和下载功能，但如果开发机的登陆需要经过跳板机是，scp命令就没有办法正常使用了。">
@@ -231,7 +231,27 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/bin</span><br><span class="line"></span><br><span class="line">wget https://raw.github.com/mmastrac/iterm2-zmodem/master/iterm2-send-zmodem.sh</span><br><span class="line"></span><br><span class="line">wget https://raw.github.com/mmastrac/iterm2-zmodem/master/iterm2-recv-zmodem.sh</span><br><span class="line"></span><br><span class="line">chmod 777 /usr/local/bin/iterm2-*</span><br></pre></td></tr></table></figure>
 <p>如果命令需要权限，尝试在命令前面加上<code>sudo</code>。</p>
 <h3 id="添加trigger"><a href="#添加trigger" class="headerlink" title="添加trigger"></a>添加trigger</h3><p>打开一个iTerm终端，点击菜单的Profiles，选择某个profile之后然后继续选择advanced → triggers，添加triggers。</p>
-<p>Regular expression|Action|Action<br>|—|—|—|<br>|**B0100|Run Silent Coprocess|/usr/local/bin/iterm2-send-zmodem.sh|<br>|**B00000000000000|Run Silent Coprocess|/usr/local/bin/iterm2-recv-zmodem.sh|</p>
+<table>
+<thead>
+<tr>
+<th>Regular expression</th>
+<th>Action</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\*\*B0100</td>
+<td>Run Silent Coprocess</td>
+<td>/usr/local/bin/iterm2-send-zmodem.sh</td>
+</tr>
+<tr>
+<td>\*\*B00000000000000</td>
+<td>Run Silent Coprocess</td>
+<td>/usr/local/bin/iterm2-recv-zmodem.sh</td>
+</tr>
+</tbody>
+</table>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>重启iterm2，连接远程Linux，输入rz命令尝试一下。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh username@remote.mechine.com</span><br><span class="line">rz</span><br></pre></td></tr></table></figure>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://xfhnever.com/2015/09/04/mac-rzsz/" target="_blank" rel="external">Mac(二)- Mac下使用rz、sz</a><br><a href="http://codelife.me/blog/2013/03/02/zmodem-integration-for-iterm2/" target="_blank" rel="external">在iTerm2中使用Zmodem传输文件</a></p>
